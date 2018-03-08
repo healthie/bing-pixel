@@ -12,7 +12,7 @@ const log = (msg, type = "info") => {
 
 const isInitialized = () => {
     if (!initialized)
-        log(`Pixel not initialized before calling methods. 😩`, "error");
+        console.error(`Pixel not initialized before calling methods. 😩`, "error");
     return initialized;
 }
 
