@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Bing from '../src/index';
+import Bing from '../dist/index';
 
 const codeExample = `
     componentDidMount() {
