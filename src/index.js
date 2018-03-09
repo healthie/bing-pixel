@@ -30,7 +30,7 @@ export default {
                 var o = { ti: pixelId };
                 o.q = w[u];
                 w[u] = new UET(o);
-                cb && typeof cb === "function" ? cb() : w[u].pageLoad();
+                cb && typeof cb === "function" ? cb() : w[u].push("pageLoad");
             }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
                 var s = this.readyState;
                 s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
