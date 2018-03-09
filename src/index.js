@@ -16,7 +16,7 @@ const isInitialized = () => {
 }
 
 export default {
-    init: (pixelId, opts = defaultOpts, cb = undefined) => {
+    init: (pixelId, opts = defaultOpts) => {
 
         if (!pixelId)
             return console.error("[pixel-bing] pixelId is mandatory 😩.");
@@ -28,9 +28,7 @@ export default {
             var f, n, i;
             w[u] = w[u] || [], f = function () {
                 var o = { ti: pixelId };
-                o.q = w[u];
-                w[u] = new UET(o);
-                cb && typeof cb === "function" ? cb() : w[u].push("pageLoad");
+                o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
             }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
                 var s = this.readyState;
                 s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)

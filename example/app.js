@@ -4,11 +4,7 @@ import Bing from '../dist/index';
 
 const codeExample = `
     componentDidMount() {
-        Bing.init(
-            bingId,
-            { debug: true },
-            () => Bing.pageLoad()
-        );
+        Bing.init(bingId, { debug: true });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -18,11 +14,7 @@ const codeExample = `
 
 class App extends Component {
     componentDidMount() {
-        Bing.init(
-            BING_ID, 
-            { debug: true }, 
-            () => Bing.pageLoad()
-        );
+        Bing.init(BING_ID, { debug: true });
     }
 
     componentDidUpdate(prevProps, prevState) {        
