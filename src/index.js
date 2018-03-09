@@ -1,6 +1,5 @@
 let initialized = false;
 let debug = false;
-
 const defaultOpts = { debug: false };
 
 const log = (msg, type = "info") => {
@@ -17,16 +16,21 @@ const isInitialized = () => {
 }
 
 export default {
-    init: (pixelId, opts = defaultOpts) => {
+    init: (pixelId, opts = defaultOpts, cb = undefined) => {
+
+        if (!pixelId)
+            return console.error("[pixel-bing] pixelId is mandatory 😩.");
 
         if (!window)
-            return console.error("window is needed in order to work 😩.");
+            return console.error("[pixel-bing] window is needed in order to work 😩.");
 
         (function (w, d, t, r, u) {
             var f, n, i;
             w[u] = w[u] || [], f = function () {
                 var o = { ti: pixelId };
-                o.q = w[u], w[u] = new UET(o)/*, w[u].push("pageLoad")*/
+                o.q = w[u];
+                w[u] = new UET(o);
+                cb && typeof cb === "function" ? cb() : w[u].pageLoad();
             }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
                 var s = this.readyState;
                 s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
@@ -38,20 +42,29 @@ export default {
         debug = opts.debug;
 
         log(`Pixel initialized with id: ${pixelId}`);
-        // console.log(window.uetq);
     },
 
     pageLoad: () => {
         if (!isInitialized())   return;
 
         window.uetq.push('pageLoad');
+
         log(`pageLoad tracked.`);
     },
 
-    conversion: value => {
+    conversion: ({ value, currency }) => {
         if (!isInitialized())   return;
 
-        window.uetq.push({ 'gv': value });
-        log(`Conversion recorded with value: ${value}`);
+        const data = {};
+
+        if (value)
+            data['gv'] = value;
+
+        if (currency)
+            data['gc'] = currency;
+
+        window.uetq.push(data);
+        
+        log(`Conversion recorded with value: ${JSON.stringify(data)}`);
     }
 };

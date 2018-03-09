@@ -5,6 +5,12 @@
             "presets": [
                 "minify"
             ]
+        },
+        "development": {
+            "presets": [
+                "env",
+                "react"
+            ]
         }
     }
 }

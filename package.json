@@ -1,16 +1,37 @@
 {
   "name": "bing-pixel",
   "version": "1.0.2",
-  "description": "",
+  "description": "Super simple implementation of Bing Ads pixel. Tracks pageLoads and Conversions",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "export NODE_ENV=development; webpack-dev-server --open --config webpack.config.dev.js --mode development",
+    "build": "export NODE_ENV=production; webpack --config webpack.config.js --mode production"
   },
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://github.com/manelgarcia/bing-pixel",
+  "author": {
+    "name": "Manel García",
+    "email": "manelet@gmail.com"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "bing",
+    "bing pixel"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manelgarcia/bing-pixel/issues"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-minify": "^0.3.0"
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
   }
 }
