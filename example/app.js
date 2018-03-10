@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Bing from '../dist/index';
+import createBingPixel from '../dist/index';
+
+const Bing = createBingPixel(BING_ID, { debug: true });
 
 const codeExample = `
+    ...
+    const Bing = createBingPixel(BING_ID, { debug: true });
+    ...
+
     componentDidMount() {
-        Bing.init(bingId, { debug: true });
+        Bing.init();
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -14,7 +20,7 @@ const codeExample = `
 
 class App extends Component {
     componentDidMount() {
-        Bing.init(BING_ID, { debug: true });
+        Bing.init();
     }
 
     componentDidUpdate(prevProps, prevState) {        

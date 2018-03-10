@@ -1,68 +1,72 @@
-let initialized = false;
-let debug = false;
 const defaultOpts = { debug: false };
 
-const log = (msg, type = "info") => {
-    if (debug) {
-        const func = type === "error" ? console.error : console.info;
-        func(`[bing-pixel] ${msg}`);
+const createBingPixel = (pixelId, opts = defaultOpts) => {
+    let initialized = false;
+    let debug = opts.debug;
+
+    const log = (msg, type = "info") => {
+        if (debug) {
+            const func = type === "error" ? console.error : console.info;
+            func(`[bing-pixel] ${msg}`);
+        }
     }
-}
 
-const isInitialized = () => {
-    if (!initialized)
-        console.error(`Pixel not initialized before calling methods. 😩`, "error");
-    return initialized;
-}
+    const isInitialized = () => {
+        if (!initialized)
+            log(`Pixel not initialized before calling methods. 😩`, "error");
+        return initialized;
+    }
 
-export default {
-    init: (pixelId, opts = defaultOpts) => {
+    return {
+        init: (opts = defaultOpts) => {
 
-        if (!pixelId)
-            return console.error("[pixel-bing] pixelId is mandatory 😩.");
+            if (!pixelId) return log("[pixel-bing] pixelId is mandatory 😩.", "error");
 
-        if (!window)
-            return console.error("[pixel-bing] window is needed in order to work 😩.");
+            if (!window)  return log("[pixel-bing] window is needed in order to work 😩.", "error");
 
-        (function (w, d, t, r, u) {
-            var f, n, i;
-            w[u] = w[u] || [], f = function () {
-                var o = { ti: pixelId };
-                o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
-            }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
-                var s = this.readyState;
-                s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
-            }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
-        })(window, document, "script", "//bat.bing.com/bat.js", "uetq");
+            (function (w, d, t, r, u) {
+                var f, n, i;
+                w[u] = w[u] || [], f = function () {
+                    var o = { ti: pixelId };
+                    o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
+                }, n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
+                    var s = this.readyState;
+                    s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
+                }, i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
+            })(window, document, "script", "//bat.bing.com/bat.js", "uetq");
 
-        window.uetq = window.uetq || [];
-        initialized = true;
-        debug = opts.debug;
+            window.uetq = window.uetq || [];
+            initialized = true;
+            debug = opts.debug;
 
-        log(`Pixel initialized with id: ${pixelId}`);
-    },
+            log(`Pixel initialized with id: ${pixelId}`);
+        },
 
-    pageLoad: () => {
-        if (!isInitialized())   return;
+        pageLoad: () => {
+            if (!isInitialized()) return;
 
-        window.uetq.push('pageLoad');
+            window.uetq = new UET(opts);
+            window.uetq.push('pageLoad');
 
-        log(`pageLoad tracked.`);
-    },
+            log(`pageLoad tracked.`);
+        },
 
-    conversion: ({ value, currency }) => {
-        if (!isInitialized())   return;
+        conversion: ({ value, currency }) => {
+            if (!isInitialized()) return;
 
-        const data = {};
+            const data = {};
 
-        if (value)
-            data['gv'] = value;
+            if (value)
+                data['gv'] = value;
 
-        if (currency)
-            data['gc'] = currency;
+            if (currency)
+                data['gc'] = currency;
 
-        window.uetq.push(data);
-        
-        log(`Conversion recorded with value: ${JSON.stringify(data)}`);
+            window.uetq.push(data);
+
+            log(`Conversion recorded with value: ${JSON.stringify(data)}`);
+        }
     }
 };
+
+export default createBingPixel;
