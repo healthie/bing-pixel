@@ -14,4 +14,15 @@ Super minimal implementation for bing pixel.
     componentDidUpdate(prevProps, prevState) {
         Bing.pageLoad();
     }
+
+    ...
+        const conversion = {
+            value: 1,
+            currency: "EUR"
+        };
+
+        <button onClick={ () => Bing.conversion(conversion) }>
+            Track conversion!
+        </button>
+    ...
 ```
