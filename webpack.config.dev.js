@@ -10,7 +10,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'example'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        libraryTarget: 'var',
+        library: 'createBingPixel'
     },
     module: {
         rules: [{
