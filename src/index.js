@@ -1,9 +1,9 @@
 const defaultOpts = { debug: false };
 
-const createBingPixel = (pixelId, opts = defaultOpts) => {
+export default (pixelId, opts = defaultOpts) => {
     let initialized = false;
     let debug = opts.debug;
-
+    
     const log = (msg, type = "info") => {
         if (debug) {
             const func = type === "error" ? console.error : console.info;
@@ -20,9 +20,9 @@ const createBingPixel = (pixelId, opts = defaultOpts) => {
     return {
         init: (opts = defaultOpts) => {
 
-            if (!pixelId) return log("[pixel-bing] pixelId is mandatory 😩.", "error");
+            if (!pixelId) return log("pixelId is mandatory 😩.", "error");
 
-            if (!window)  return log("[pixel-bing] window is needed in order to work 😩.", "error");
+            if (!window)  return log("window is needed in order to work 😩.", "error");
 
             (function (w, d, t, r, u) {
                 var f, n, i;
@@ -68,5 +68,3 @@ const createBingPixel = (pixelId, opts = defaultOpts) => {
         }
     }
 };
-
-export default createBingPixel;

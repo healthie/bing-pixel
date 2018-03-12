@@ -1,13 +1,14 @@
 const path = require("path");
 const webpack = require("webpack");
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     devtool: "cheap-module-source-map",
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: 'index.js'
+        filename: 'index.js',
+        libraryTarget: "umd",
+        library: "createBingPixel"
     },
     module: {
         rules: [
@@ -20,8 +21,5 @@ module.exports = {
                 }
             }
         ]
-    },
-    plugins: [
-        // new UglifyJsPlugin(),
-    ]
+    }
 };
