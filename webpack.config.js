@@ -7,7 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'index.js',
-        libraryTarget: "umd",
+        libraryTarget: "var",
         library: "createBingPixel"
     },
     module: {
