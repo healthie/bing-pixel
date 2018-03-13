@@ -1,6 +1,6 @@
 {
   "name": "bing-pixel",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Super simple implementation of Bing Ads pixel. Tracks pageLoads and Conversions",
   "main": "dist/index.js",
   "scripts": {
