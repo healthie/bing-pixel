@@ -116,7 +116,7 @@ export default (pixelId, opts = defaultOpts) => {
         pageLoad: () => {
             if (!isInitialized()) return;
 
-            if (UET) {
+            if (typeof UET !== "undefined") {
                 window.uetq = new UET({ ti: pixelId });
                 window.uetq.push('pageLoad');
 
