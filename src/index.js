@@ -3,7 +3,7 @@ const defaultOpts = { debug: false };
 export default (pixelId, opts = defaultOpts) => {
     let initialized = false;
     let debug = opts.debug;
-    
+
     const log = (msg, type = "info") => {
         if (debug) {
             const func = type === "error" ? console.error : console.info;
@@ -22,7 +22,7 @@ export default (pixelId, opts = defaultOpts) => {
 
             if (!pixelId) return log("pixelId is mandatory 😩.", "error");
 
-            if (!window)  return log("window is needed in order to work 😩.", "error");
+            if (!window) return log("window is needed in order to work 😩.", "error");
 
             (function (w, d, t, r, u) {
                 var f, n, i;

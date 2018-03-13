@@ -1,14 +1,12 @@
 const path = require("path");
-const webpack = require("webpack");
 
 module.exports = {
     devtool: "cheap-module-source-map",
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: 'index.js',
-        libraryTarget: "var",
-        library: "createBingPixel"
+        filename: 'index.min.js',
+        libraryTarget: "umd"
     },
     module: {
         rules: [
