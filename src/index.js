@@ -116,10 +116,12 @@ export default (pixelId, opts = defaultOpts) => {
         pageLoad: () => {
             if (!isInitialized()) return;
 
-            window.uetq = new UET({ ti: pixelId });
-            window.uetq.push('pageLoad');
+            if (UET) {
+                window.uetq = new UET({ ti: pixelId });
+                window.uetq.push('pageLoad');
 
-            log(`pageLoad tracked.`);
+                log(`pageLoad tracked.`);
+            }
         },
 
         conversion: ({ value, currency }) => {
