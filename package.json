@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=development; webpack-dev-server --open --config webpack.config.dev.js --mode development",
-    "build": "export NODE_ENV=production; webpack --config webpack.config.js --mode production"
+    "build": "export NODE_ENV=production; webpack --config webpack.config.js --mode production",
+    "transpile": "npx babel src/index.js -o dist/index.js"
   },
   "repository": {
     "type": "git",
