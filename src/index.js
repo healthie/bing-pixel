@@ -5,7 +5,7 @@ export default (pixelId, opts = { debug: false }) => {
     const log = (msg, type = "info") => {
         if (debug) {
             const func = type === "error" ? console.error : console.info;
-            func.call(window, `[bing-pixel] ${msg}`);
+            func.call(console, `[bing-pixel] ${msg}`);
         }
     }
 

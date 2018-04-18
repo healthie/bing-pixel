@@ -15,7 +15,7 @@ exports.default = function (pixelId) {
 
         if (debug) {
             var func = type === "error" ? console.error : console.info;
-            func.call(window, "[bing-pixel] " + msg);
+            func.call(console, "[bing-pixel] " + msg);
         }
     };
 
