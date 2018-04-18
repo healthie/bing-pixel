@@ -79,7 +79,7 @@ export default (pixelId, opts = defaultOpts) => {
     const log = (msg, type = "info") => {
         if (debug) {
             const func = type === "error" ? console.error : console.info;
-            func(`[bing-pixel] ${msg}`);
+            func.call(window, `[bing-pixel] ${msg}`);
         }
     }
 
@@ -91,10 +91,8 @@ export default (pixelId, opts = defaultOpts) => {
 
     return {
         init: () => {
-
-            if (!pixelId) return log("pixelId is mandatory 😩.", "error");
-
-            if (!window) return log("window is needed in order to work 😩.", "error");
+            if (!pixelId) return console.error(`pixelId is mandatory 😩.`);
+            if (!window)  return console.error(`window is needed in order to work 😩.`);
 
             (function (w, d, t, r, u) {
                 var f, n, i;
