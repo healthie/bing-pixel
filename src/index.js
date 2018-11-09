@@ -47,7 +47,15 @@ export default (pixelId, opts = { debug: false }) => {
                 log(`pageLoad tracked.`);
             }
         },
+        event: (eventAction, eventCategory, eventLabel, eventValue) => {
+            if (!isInitialized()) return;
 
+            const data = {event_category: eventCategory, event_label: eventLabel, event_value: eventValue}
+
+            window.uetq.push('event', eventAction, data);
+
+            log(`Event recorded with action: ${eventAction}`);
+        },
         conversion: ({ value, currency }) => {
             if (!isInitialized()) return;
 
